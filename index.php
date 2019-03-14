@@ -45,17 +45,17 @@
             <form method="POST" action="index.php">
                 <div class="row">
                     <div class="col mb-2">
-                        <input class="form-control" type="text" placeholder="Username">
+                        <input class="form-control" type="text" name="username" placeholder="Username">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col mb-2">
-                        <input class="form-control" type="password" placeholder="Password">
+                        <input class="form-control" type="password" name="password" placeholder="Password">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col mb-2">
-                        <input type="submit" value="Login" class="btn btn-outline-dark btn-block">
+                        <input type="submit" value="Login" name="submit" class="btn btn-outline-dark btn-block">
                     </div>
                 </div>
             </form>
@@ -98,6 +98,22 @@
                 class="btn btn-outline-dark"
                 href="https://github.com/backstab319/Residency-Exchange-Collaberation-System">github page.</a></p>
     </div>
+
+
+
+    <?php
+        include "connect.php";
+        if($_POST["submit"]){
+            operation();
+        }
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        function operation(){
+            global $username,$password,$conn;
+            echo $username,$password;
+        }
+
+    ?>
 
 
 
