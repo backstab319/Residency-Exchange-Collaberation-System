@@ -42,7 +42,7 @@
     <div class="container home text-center col-md-5">
         <h1 class="display-4">Login</h1>
         <div class="form-group">
-            <form method="POST" action="index.php">
+            <form method="POST" action="/index.php">
                 <div class="row">
                     <div class="col mb-2">
                         <input class="form-control" type="text" name="username" placeholder="Username">
@@ -62,6 +62,30 @@
         </div>
     </div>
 
+
+
+    <div class="container text-center">
+    <?php
+        include "connect.php";
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        if($_POST["submit"]){
+            operation();
+        }
+        function operation(){
+            global $username, $password, $conn;
+            $sql = "SELECT password FROM login_details WHERE user_id='$username'";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            if($password == $row["password"]){
+                echo "<script type='text/javascript'>document.location = 'welcome.html';</script>";
+                exit();
+            }else{
+                echo "The given username or password is incorrect!";
+            }
+        }
+    ?>
+    </div>
 
 
 
@@ -94,26 +118,9 @@
 
     <div class="container jumbotron text-center" id="status">
         <h1 class="display-4">Project Status</h1>
-        <p class="lead text-justify text-center">The project is in beta stage. The code can be found on my <a
-                class="btn btn-outline-dark"
-                href="https://github.com/backstab319/Residency-Exchange-Collaberation-System">github page.</a></p>
+        <p class="lead text-justify text-center">The project is in beta stage. The code can be found on my 
+            <a class="btn btn-outline-dark" href="https://github.com/backstab319/Residency-Exchange-Collaberation-System">github page.</a></p>
     </div>
-
-
-
-    <?php
-        include "connect.php";
-        if($_POST["submit"]){
-            operation();
-        }
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-        function operation(){
-            global $username,$password,$conn;
-            echo $username,$password;
-        }
-
-    ?>
 
 
 
