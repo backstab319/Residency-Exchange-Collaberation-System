@@ -39,7 +39,7 @@
 
 
     <div class="row home">
-        <div class="col-md-4 container text-center">
+        <div class="col-md-4 col-lg-4 text-center container">
             <h1 class="display-4">Login</h1>
             <div class="form-group">
                 <form method="POST" action="/index.php">
@@ -63,7 +63,7 @@
         </div>
 
 
-        <div class="col-md-4 container text-center">
+        <div class="col-md-4 col-lg-4 text-center container">
             <h1 class="display-4">Sign up</h1>
             <div class="form-group">
             <form method="POST" action="/index.php">
