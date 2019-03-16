@@ -1,3 +1,9 @@
+<?php
+    function userinit(){
+        global $username;
+        setcookie("user",$username,time()+1800,"/");
+    }
+?>
 <!DOCTYPE html>
 <html>
 
@@ -38,7 +44,7 @@
 
 
 
-    <div class="row">
+    <div class="row container">
         <div class="col-md-4 px-auto col-lg-4 text-center container pr-0">
             <h1 class="display-4">Login</h1>
             <div class="form-group">
@@ -122,6 +128,7 @@
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
             if($password == $row["pass"] and $password != NULL){
+                userinit();
                 echo "<script type='text/javascript'>document.location = 'welcome.html';</script>";
                 exit();
             }else{
