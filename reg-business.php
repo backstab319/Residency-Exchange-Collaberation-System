@@ -53,16 +53,16 @@
             process_reg();
         }
         function process_reg(){
-            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_details,$conn;
-            if(($bus_name and $owner_name and $owner_number and $bus_address and $bus_details) == NULL){
+            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn;
+            if(($bus_name and $owner_name and $owner_number and $bus_address and $bus_type) == NULL){
                 echo "Please recheck the entered values!";
             }else{
                 register();
             }
         }
         function register(){
-            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_details,$conn;
-            $sql = "INSERT INTO business_reg (bus_name, owner_name, owner_contact, owner_address, business_type) VALUES('$bus_name','$owner_name',$owner_number,'$bus_address','$bus_details')";
+            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn;
+            $sql = "INSERT INTO business_reg (bus_name, owner_name, owner_contact, owner_address, business_type) VALUES('$bus_name','$owner_name',$owner_number,'$bus_address','$bus_type')";
             if($conn->query($sql) === TRUE){
                 echo "Business successfully registered!";
             }else{
