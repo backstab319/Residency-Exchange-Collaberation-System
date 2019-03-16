@@ -129,7 +129,7 @@
             $row = $result->fetch_assoc();
             if($password == $row["pass"] and $password != NULL){
                 userinit();
-                echo "<script type='text/javascript'>document.location = 'welcome.html';</script>";
+                echo "<script type='text/javascript'>document.location = 'welcome.php';</script>";
                 exit();
             }else{
                 echo "The given username or password is incorrect!";
