@@ -28,7 +28,15 @@
                 <input class="form-control mb-2" type="text" name="name" placeholder="Owner name">
                 <input class="form-control mb-2" type="number" name="number" placeholder="Number">
                 <input class="form-control mb-2" type="text" name="address" placeholder="Business address">
-                <input class="form-control mb-2" type="text" name="business-details" placeholder="Business details">
+                <div class="form-group">
+                    <label for="bus_type">Business type:</label>
+                    <select class="form-control" name="bus_type" id="bus_type">
+                        <option value="hotel">Hotel</option>
+                        <option value="grocery">Grocery</option>
+                        <option value="service">Service</option>
+                        <option value="mall">Mall</option>
+                    </select>
+                </div>
                 <input type="submit" value="Register!" class="btn btn-outline-dark" name="reg">
             </form>
         </div>
@@ -41,7 +49,7 @@
             $owner_name = $_POST["name"];
             $owner_number = $_POST["number"];
             $bus_address = $_POST["address"];
-            $bus_details = $_POST["business-details"];
+            $bus_type = $_POST["bus_type"];
             process_reg();
         }
         function process_reg(){
@@ -54,7 +62,7 @@
         }
         function register(){
             global $bus_name,$owner_name,$owner_number,$bus_address,$bus_details,$conn;
-            $sql = "INSERT INTO business_reg (bus_name, owner_name, owner_contact, owner_address, business_details) VALUES('$bus_name','$owner_name',$owner_number,'$bus_address','$bus_details')";
+            $sql = "INSERT INTO business_reg (bus_name, owner_name, owner_contact, owner_address, business_type) VALUES('$bus_name','$owner_name',$owner_number,'$bus_address','$bus_details')";
             if($conn->query($sql) === TRUE){
                 echo "Business successfully registered!";
             }else{
