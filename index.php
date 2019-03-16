@@ -121,7 +121,7 @@
             $sql = "SELECT pass FROM login_details WHERE user_id='$username'";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
-            if($password == $row["pass"]){
+            if($password == $row["pass"] and $password != NULL){
                 echo "<script type='text/javascript'>document.location = 'welcome.html';</script>";
                 exit();
             }else{
