@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="navbar-section">
+    <div class="navbar-section home">
         <navbar class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
             <div class="container">
                 <a class="navbar-brand">RECS</a>
@@ -38,7 +38,7 @@
 
 
 
-    <div class="row home">
+    <div class="row">
         <div class="col-md-4 col-lg-4 text-center container">
             <h1 class="display-4">Login</h1>
             <div class="form-group">
