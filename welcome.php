@@ -63,11 +63,8 @@
             function data_display(){
                 global $result;
                 while($row = $result->fetch_assoc()){
-                    $link = $row["bus_name"].$row["owner_name"];
-                    $link = "/business/".$link."/".$link.".php";
-                    echo $link;
                     echo "<div class='container'>
-                        <h3 class='display-7'>". $row['business_type'] . ': ' . $row['bus_name'] .  "<button class='btn btn-outline btn-link' type='button' href='"."'></button></h3>
+                        <h3 class='display-7'>". $row['business_type'] . ': ' . $row['bus_name'] .  "<a class='btn btn-outline-primary btn-link' href='" . $row['page_link'] . "'>Visit</a></h3>
                     </div>";
                 }
             }
