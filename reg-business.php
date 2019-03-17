@@ -51,6 +51,7 @@
             $bus_type = $_POST["bus_type"];
             $link;
             $pagelink;
+            $cpanel;
             process_reg();
         }
         function process_reg(){
@@ -85,10 +86,19 @@
             $content="<?php include '../../page_init/business_boilerplate.php';?>";
             fwrite($mypage,$content);
             fclose($mypage);
+            makecpanel();
+        }
+        function makecpanel(){
+            global $link, $bus_name, $owner_name,$cpanel,$conn;
+            $cpanel = $link."/".$bus_name.$owner_name."cpanel.php";
+            $mypage = fopen($cpanel, "w") or die("Unable to create homepage. Please contact our dev team.");
+            $content="<?php include '../../page_init/business_cpanel_boilerplate.php';?>";
+            fwrite($mypage,$content);
+            fclose($mypage);
         }
         function view_business(){
-            global $conn,$bus_name,$owner_name;
-            $sql = "INSERT INTO view_business (bus_name, owner_name) VALUES ('$bus_name','$owner_name')";
+            global $conn,$bus_name,$owner_name,$cpanel;
+            $sql = "INSERT INTO view_business (bus_name, owner_name, cpanel_link) VALUES ('$bus_name','$owner_name','$cpanel')";
             $conn->query($sql);
         }
         $conn->close();

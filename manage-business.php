@@ -51,7 +51,7 @@
             while($row = $result->fetch_assoc()){
                 echo "
                 <div class='container text-center'>
-                    " . $row['bus_name'] . "</div>";
+                    <h3 class='display-7'>" . $row['bus_name'] . "<a class='btn btn-link btn-outline-primary' href='".$row['cpanel_link']."'>Cpanel</a></h3></div>";
             }
         }
         business_search();

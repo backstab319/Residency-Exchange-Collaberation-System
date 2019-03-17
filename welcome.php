@@ -38,7 +38,7 @@
                             if($result->num_rows > 0){
                                 echo "
                                 <li class='nav-item'>
-                                    <a class='nav-link' href='/business-cpanel.php'>Business C-Panel</a>
+                                    <a class='nav-link' href='/manage-business.php'>Manage Business</a>
                                 </li>
                                 ";
                             }
