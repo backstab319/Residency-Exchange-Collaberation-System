@@ -82,12 +82,9 @@
             global $link, $bus_name, $owner_name,$pagelink,$conn;
             $pagelink = $link."/".$bus_name.$owner_name.".php";
             $mypage = fopen($pagelink, "w") or die("Unable to create homepage. Please contact our dev team.");
-            $content=homepagecontent();
+            $content="<?php include '../../page_init/business_boilerplate.php';?>";
             fwrite($mypage,$content);
             fclose($mypage);
-        }
-        function homepagecontent(){
-            
         }
     ?>
     </div>
