@@ -41,25 +41,37 @@
     <div class="container jumbotron text-center">
         <h1 class="display-4">Services available.</h1>
         <?php
-            include "/connect.php";
+            include "connect.php";
             $bus_name;
             $owner_name;
             $owner_number;
             $bus_address;
             $bus_type;
+            $result;
             function data_init(){
-                global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn;
+                global $bus_name, $owner_name, $owner_number, $bus_address, $bus_type, $conn, $result;
                 $sql = "SELECT * FROM business_reg";
                 $result = $conn->query($sql);
                 if($result->num_rows > 0){
-                    echo "There is data in sql";
-                }else{
-                    echo "There is no data in sql";
+                    data_display();
                 }
-                while($row = $result->fetch_assoc()){
-                    echo $row["bus_name"] . $row["owner_name"] . $row["owner_contact"] . $row["owner_address"] . $row["business_type"];
+                else{
+                    echo "There are no businesses to display here.";
                 }
             }
+            
+            function data_display(){
+                global $result;
+                while($row = $result->fetch_assoc()){
+                    $link = $row["bus_name"].$row["owner_name"];
+                    $link = "/business/".$link."/".$link.".php";
+                    echo $link;
+                    echo "<div class='container'>
+                        <h3 class='display-7'>". $row['business_type'] . ': ' . $row['bus_name'] .  "<button class='btn btn-outline btn-link' type='button' href='"."'></button></h3>
+                    </div>";
+                }
+            }
+            data_init();
         ?>
     </div>
 

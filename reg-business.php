@@ -50,6 +50,8 @@
             $owner_number = $_POST["number"];
             $bus_address = $_POST["address"];
             $bus_type = $_POST["bus_type"];
+            $link;
+            $pagelink;
             process_reg();
         }
         function process_reg(){
@@ -61,13 +63,28 @@
             }
         }
         function register(){
-            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn;
-            $sql = "INSERT INTO business_reg (bus_name, owner_name, owner_contact, owner_address, business_type) VALUES('$bus_name','$owner_name',$owner_number,'$bus_address','$bus_type')";
+            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn,$pagelink;
+            makedir();
+            makehomepage();
+            $sql = "INSERT INTO business_reg (bus_name, owner_name, owner_contact, owner_address, business_type, page_link) VALUES('$bus_name','$owner_name',$owner_number,'$bus_address','$bus_type','$pagelink')";
             if($conn->query($sql) === TRUE){
                 echo "Business successfully registered!";
             }else{
                 echo "Error registering business. Please contact our dev team.";
             }
+        }
+        function makedir(){
+            global $bus_name, $owner_name, $link;
+            $link = "business/".$bus_name.$owner_name;
+            mkdir($link);
+        }
+        function makehomepage(){
+            global $link, $bus_name, $owner_name,$pagelink,$conn;
+            $pagelink = $link."/".$bus_name.$owner_name;
+            $mypage = fopen($pagelink, "w") or die("Unable to create homepage. Please contact our dev team.");
+            $content="test";
+            fwrite($mypage,$content);
+            fclose($mypage);
         }
     ?>
     </div>
