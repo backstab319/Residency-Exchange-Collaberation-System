@@ -42,15 +42,24 @@
         <h1 class="display-4">Services available.</h1>
         <?php
             include "/connect.php";
+            $bus_name;
+            $owner_name;
+            $owner_number;
+            $bus_address;
+            $bus_type;
             function data_init(){
-                global $conn;
-                $sql = "SELECT bus_name FROM business_reg";
+                global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn;
+                $sql = "SELECT * FROM business_reg";
                 $result = $conn->query($sql);
-                $row = $result->fetch_assoc();
-                $test = "Hello!";
+                if($result->num_rows > 0){
+                    echo "There is data in sql";
+                }else{
+                    echo "There is no data in sql";
+                }
+                while($row = $result->fetch_assoc()){
+                    echo $row["bus_name"] . $row["owner_name"] . $row["owner_contact"] . $row["owner_address"] . $row["business_type"];
+                }
             }
-            global $test;
-            echo $test;
         ?>
     </div>
 
