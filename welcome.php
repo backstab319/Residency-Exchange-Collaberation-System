@@ -40,6 +40,18 @@
 
     <div class="container jumbotron text-center">
         <h1 class="display-4">Services available.</h1>
+        <?php
+            include "/connect.php";
+            function data_init(){
+                global $conn;
+                $sql = "SELECT bus_name FROM business_reg";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                $test = "Hello!";
+            }
+            global $test;
+            echo $test;
+        ?>
     </div>
 
     
