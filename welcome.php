@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <?php
+        include "connect.php";
+        if(!isset($_COOKIE["user"])){
+        echo "
+        <div class='container jumbotron text-center mt-2'>
+        Please login back in again to continue browsing RECS!
+        </div>";
+        exit();
+    }
+    $user = $_COOKIE["user"];
+    ?>
     <div class="navbar-section home">
         <navbar class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
             <div class="container">
@@ -19,6 +30,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/reg-business.php">Register business</a>
                         </li>
+                        <?php
+                        function check_business(){
+                            global $conn,$user;
+                            $sql = "SELECT * FROM view_business WHERE owner_name='$user'";
+                            $result = $conn->query($sql);
+                            if($result->num_rows > 0){
+                                echo "
+                                <li class='nav-item'>
+                                    <a class='nav-link' href='/business-cpanel.php'>Business C-Panel</a>
+                                </li>
+                                ";
+                            }
+                        }
+                        check_business();
+                        ?>
                     </ul>
                     </div>
                 </div>
@@ -29,19 +55,12 @@
 
     <div class="container jumbotron text-center mt-2">
         <h1 class="display-4">Welcome to RECS!</h1>
-        <?php
-            if(!isset($_COOKIE["user"])){
-            echo "Please login back in again to continue browsing RECS!";
-            exit();
-        }
-        ?>
     </div>
 
 
     <div class="container jumbotron text-center">
         <h1 class="display-4">Services available.</h1>
         <?php
-            include "connect.php";
             $bus_name;
             $owner_name;
             $owner_number;
