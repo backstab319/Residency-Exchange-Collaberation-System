@@ -5,6 +5,7 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <?php
@@ -15,6 +16,25 @@
         exit();
         }
     ?>
+
+    <div class="navbar-section home">
+        <navbar class="navbar expand-sm navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand">RECS</a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#toggle"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="toggle">
+                    <div class="navbar-menu ml-auto">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="http://thebackstabproject.hostingerapp.com/welcome.php">Home</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </navbar>
+    </div>
+
     <div class="container jumbotron text-center">
         <h1 class="display-4">Cpanel</h1>
     </div>
