@@ -25,7 +25,6 @@
         <div class="form-group col-md-4 col-lg-4 mb-2">
             <form method="POST" action="reg-business.php">
                 <input class="form-control mb-2" type="text" name="business" placeholder="Business name">
-                <input class="form-control mb-2" type="text" name="name" placeholder="Owner name">
                 <input class="form-control mb-2" type="number" name="number" placeholder="Number">
                 <input class="form-control mb-2" type="text" name="address" placeholder="Business address">
                 <div class="form-group">
@@ -46,7 +45,7 @@
         include "connect.php";
         if($_POST["reg"]){
             $bus_name = $_POST["business"];
-            $owner_name = $_POST["name"];
+            $owner_name = $_COOKIE["user"];
             $owner_number = $_POST["number"];
             $bus_address = $_POST["address"];
             $bus_type = $_POST["bus_type"];
@@ -72,6 +71,7 @@
             }else{
                 echo "Error registering business. Please contact our dev team.";
             }
+            view_business();
         }
         function makedir(){
             global $bus_name, $owner_name, $link;
@@ -86,6 +86,12 @@
             fwrite($mypage,$content);
             fclose($mypage);
         }
+        function view_business(){
+            global $conn,$bus_name,$owner_name;
+            $sql = "INSERT INTO view_business (bus_name, owner_name) VALUES ('$bus_name','$owner_name')";
+            $conn->query($sql);
+        }
+        $conn->close();
     ?>
     </div>
 
