@@ -124,25 +124,55 @@
         </div>
     </div>
 
+    <div class="container text-center form-group col-md-4 col-lg-4 mb-2">
+        <h1 class="display-5">Edit employee data</h1>
+        <div class="form-group">
+        <form method="POST" action="<?php $cpanel;?>">
+            <select class="form-control mb-2" name="change">
+                <option value="emp_name">Employee name</option>
+                <option value="emp_phone">Employee phone</option>
+            </select>
+            <input class="form-control mb-2" type="text" name="data" placeholder="Data to be edited">
+            <input class="form-control mb-2" type="text" name="replace" placeholder="Data to be edited to">
+            <input type="submit" value="Change" class="btn btn-outline-dark mb-2" name="edit">
+            </form>
+        </div>
+    </div>
+
     <?php
+        $final = "http://thebackstabproject.hostingerapp.com/".$cpanel;
         if($_POST["add"]){
             addemployee();
         }
         if($_POST["delete"]){
             deleteemployee();
         }
+        if($_POST["edit"]){
+            editdata();
+        }
         function addemployee(){
-            global $bus_name,$owner_name,$conn;
+            global $bus_name,$owner_name,$conn,$final;
             $emp_name = $_POST["emp"];
             $emp_phone = $_POST["emp-phone"];
             $sql = "INSERT INTO recs_employees_details (bus_name, owner_name, emp_name, emp_phone) VALUES ('$bus_name','$owner_name','$emp_name','$emp_phone')";
             $conn->query($sql);
+            header('Location: '.$final);
         }
         function deleteemployee(){
-            global $bus_name,$owner_name,$conn;
+            global $bus_name,$owner_name,$conn,$final;
             $deleteemp = $_POST["selectemp"];
             $sql = "DELETE FROM recs_employees_details WHERE bus_name='$bus_name' AND owner_name='$owner_name' AND emp_name='$deleteemp'";
             $conn->query($sql);
+            header('Location: '.$final);
+        }
+        function editdata(){
+            global $bus_name,$owner_name,$conn,$final;
+            $col = $_POST["change"];
+            $data = $_POST["data"];
+            $update = $_POST["replace"];
+            $sql = "UPDATE recs_employees_details SET $col='$update' WHERE $col='$data' AND bus_name ='$bus_name' AND owner_name ='$owner_name'";
+            $conn->query($sql);
+            header('Location: '.$final);
         }
     ?>
 
