@@ -71,6 +71,7 @@
             $link;
             $pagelink;
             $cpanel;
+            $varspagelink;
             process_reg();
         }
         function process_reg(){
@@ -110,7 +111,7 @@
         function makecpanel(){
             global $link, $bus_name, $owner_name,$cpanel,$conn;
             $cpanel = $link."/".$bus_name.$owner_name."cpanel.php";
-            $mypage = fopen($cpanel, "w") or die("Unable to create homepage. Please contact our dev team.");
+            $mypage = fopen($cpanel, "w") or die("Unable to create cpanel. Please contact our dev team.");
             $content="<?php include '../../page_init/business_cpanel_boilerplate.php';?>";
             fwrite($mypage,$content);
             fclose($mypage);
