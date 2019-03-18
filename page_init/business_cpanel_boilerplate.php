@@ -157,7 +157,7 @@
         <h1 class="display-5">Business Page Description</h1>
         <div class="form-group">
             <form method="POST" action="<?php $cpanel;?>">
-            <input class="form-control mb-2" type="text" name="description-val" placeholder="Page Heading">
+            <input class="form-control mb-2" type="text" name="description-val" placeholder="Page Description">
             <input type="submit" value="Change" class="btn btn-outline-dark" name="description">
             </form>
         </div>
