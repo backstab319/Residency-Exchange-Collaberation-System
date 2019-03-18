@@ -139,8 +139,33 @@
         </div>
     </div>
 
+    <div class="container text-center mb-2">
+        <h1 class="display-4">Main Page Configurations</h1>
+    </div>
+
+    <div class="container text-center mb-2">
+        <h1 class="display-5">Business Page Heading</h1>
+        <div class="form-group">
+            <form method="POST" action="<?php $cpanel;?>">
+            <input class="form-control mb-2" type="text" name="heading-val" placeholder="Page Heading">
+            <input type="submit" value="Change" class="btn btn-outline-dak" name="heading">
+            </form>
+        </div>
+    </div>
+
+    <div class="container text-center mb-2">
+        <h1 class="display-5">Business Page Description</h1>
+        <div class="form-group">
+            <form method="POST" action="<?php $cpanel;?>">
+            <input class="form-control mb-2" type="text" name="description-val" placeholder="Page Heading">
+            <input type="submit" value="Change" class="btn btn-outline-dak" name="description">
+            </form>
+        </div>
+    </div>
+
     <?php
         $final = "http://thebackstabproject.hostingerapp.com/".$cpanel;
+        $finalpagelink = "http://thebackstabproject.hostingerapp.com/".$pagelink;
         if($_POST["add"]){
             addemployee();
         }
@@ -149,6 +174,26 @@
         }
         if($_POST["edit"]){
             editdata();
+        }
+        if($_POST["heading"]){
+            heading();
+        }
+        if($_POST["description"]){
+            description();
+        }
+        function description(){
+            global $conn,$final;
+            $description = $_POST["description-val"];
+            $sql = "INSERT INTO business_page (bus_name, owner_name, description) VALUES ('$bus_name','$owner_name','$description')";
+            $conn->query($sql);
+            header('Location: '.$final);
+        }
+        function heading(){
+            global $conn,$final;
+            $heading = $_POST["heading-val"];
+            $sql = "INSERT INTO business_page (bus_name, owner_name, heading) VALUES ('$bus_name','$owner_name','$heading')";
+            $conn->query($sql);
+            header('Location: '.$final);
         }
         function addemployee(){
             global $bus_name,$owner_name,$conn,$final;

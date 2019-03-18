@@ -126,7 +126,7 @@
             global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn,$varspagelink,$link,$cpanel;
             $varspagelink = $link."/"."vars.php";
             $mypage = fopen($varspagelink, "w") or die("Unable to create vars page. Please contact our dev team.");
-            $content="<?php \$bus_name = '$bus_name';\$owner_name = '$owner_name';\$cpanel = '$cpanel';?>";
+            $content="<?php \$bus_name = '$bus_name';\$owner_name = '$owner_name';\$cpanel = '$cpanel';\$pagelink = '$pagelink'?>";
             fwrite($mypage,$content);
             fclose($mypage);
             $sql = "INSERT INTO business_vars (bus_name, owner_name, vars_link) VALUES ('$bus_name','$owner_name','$varspagelink')";
