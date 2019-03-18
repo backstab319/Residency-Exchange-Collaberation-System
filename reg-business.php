@@ -86,6 +86,8 @@
             global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn,$pagelink;
             makedir();
             makehomepage();
+            makecpanel();
+            createvar();
             $sql = "INSERT INTO business_reg (bus_name, owner_name, owner_contact, owner_address, business_type, page_link) VALUES('$bus_name','$owner_name',$owner_number,'$bus_address','$bus_type','$pagelink')";
             if($conn->query($sql) === TRUE){
                 echo "Business successfully registered!";
@@ -106,10 +108,9 @@
             $content="<?php include '../../page_init/business_boilerplate.php';?>";
             fwrite($mypage,$content);
             fclose($mypage);
-            makecpanel();
         }
         function makecpanel(){
-            global $link, $bus_name, $owner_name,$cpanel,$conn;
+            global $link,$bus_name,$owner_name,$cpanel,$conn;
             $cpanel = $link."/".$bus_name.$owner_name."cpanel.php";
             $mypage = fopen($cpanel, "w") or die("Unable to create cpanel. Please contact our dev team.");
             $content="<?php include '../../page_init/business_cpanel_boilerplate.php';?>";
@@ -119,6 +120,16 @@
         function view_business(){
             global $conn,$bus_name,$owner_name,$cpanel;
             $sql = "INSERT INTO view_business (bus_name, owner_name, cpanel_link) VALUES ('$bus_name','$owner_name','$cpanel')";
+            $conn->query($sql);
+        }
+        function createvar(){
+            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn,$varspagelink,$link,$cpanel;
+            $varspagelink = $link."/"."vars.php";
+            $mypage = fopen($varspagelink, "w") or die("Unable to create vars page. Please contact our dev team.");
+            $content="<?php \$bus_name = '$bus_name';\$owner_name = '$owner_name';\$cpanel = '$cpanel';?>";
+            fwrite($mypage,$content);
+            fclose($mypage);
+            $sql = "INSERT INTO business_vars (bus_name, owner_name, vars_link) VALUES ('$bus_name','$owner_name','$varspagelink')";
             $conn->query($sql);
         }
         $conn->close();
