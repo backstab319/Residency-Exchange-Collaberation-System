@@ -44,57 +44,31 @@
 
 
 
-    <div class="row container">
-        <div class="col-md-4 px-auto col-lg-4 text-center container pr-0">
+    <div class="container">
+        <div class="row">
+        <div class="container col-md-4 col-lg-4 text-center">
             <h1 class="display-4">Login</h1>
             <div class="form-group">
                 <form method="POST" action="/index.php">
-                <div class="row">
-                    <div class="col mb-2">
-                        <input class="form-control" type="text" name="username" placeholder="Username">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col mb-2">
-                        <input class="form-control" type="password" name="pass" placeholder="Password">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col mb-2">
-                        <input type="submit" value="Login" name="submit" class="btn btn-outline-dark btn-block">
-                    </div>
-                </div>
+                <input class="form-control mb-2" type="text" name="username" placeholder="Username">
+                <input class="form-control mb-2" type="password" name="pass" placeholder="Password">
+                <input type="submit" value="Login" name="submit" class="btn btn-outline-dark btn-block mb-2">
                 </form>
             </div>
         </div>
 
 
-        <div class="col-md-4 px-auto col-lg-4 text-center container pr-0">
+        <div class="container col-md-4 col-lg-4 text-center">
             <h1 class="display-4">Sign up</h1>
             <div class="form-group">
             <form method="POST" action="/index.php">
-                <div class="row">
-                    <div class="col mb-2">
-                        <input class="form-control" type="text" name="newusername" placeholder="Enter Username">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col mb-2">
-                        <input class="form-control" type="password" name="newpassword" placeholder="Enter Password">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col mb-2">
-                        <input class="form-control" type="password" name="newpassword1" placeholder="Re-enter Password">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col mb-2">
-                        <input type="submit" value="Sign up" name="newsubmit" class="btn btn-outline-dark btn-block">
-                    </div>
-                </div>
+            <input class="form-control mb-2" type="text" name="newusername" placeholder="Enter Username">
+            <input class="form-control mb-2" type="password" name="newpassword" placeholder="Enter Password">
+            <input class="form-control mb-2" type="password" name="newpassword1" placeholder="Re-enter Password">
+            <input type="submit" value="Sign up" name="newsubmit" class="btn btn-outline-dark btn-block mb-2">
             </form>
             </div>
+        </div>
         </div>
     </div>
 
