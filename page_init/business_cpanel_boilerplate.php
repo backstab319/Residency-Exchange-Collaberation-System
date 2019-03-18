@@ -143,7 +143,7 @@
         <h1 class="display-4">Main Page Configurations</h1>
     </div>
 
-    <div class="container text-center mb-2">
+    <div class="container text-center form-group col-md-4 col-lg-4 mb-2">
         <h1 class="display-5">Business Page Heading</h1>
         <div class="form-group">
             <form method="POST" action="<?php $cpanel;?>">
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <div class="container text-center mb-2">
+    <div class="container text-center form-group col-md-4 col-lg-4 mb-2">
         <h1 class="display-5">Business Page Description</h1>
         <div class="form-group">
             <form method="POST" action="<?php $cpanel;?>">
