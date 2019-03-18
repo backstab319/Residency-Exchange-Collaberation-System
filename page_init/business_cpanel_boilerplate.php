@@ -148,7 +148,7 @@
         <div class="form-group">
             <form method="POST" action="<?php $cpanel;?>">
             <input class="form-control mb-2" type="text" name="heading-val" placeholder="Page Heading">
-            <input type="submit" value="Change" class="btn btn-outline-dak" name="heading">
+            <input type="submit" value="Change" class="btn btn-outline-dark" name="heading">
             </form>
         </div>
     </div>
@@ -158,7 +158,7 @@
         <div class="form-group">
             <form method="POST" action="<?php $cpanel;?>">
             <input class="form-control mb-2" type="text" name="description-val" placeholder="Page Heading">
-            <input type="submit" value="Change" class="btn btn-outline-dak" name="description">
+            <input type="submit" value="Change" class="btn btn-outline-dark" name="description">
             </form>
         </div>
     </div>
@@ -182,14 +182,14 @@
             description();
         }
         function description(){
-            global $conn,$final;
+            global $conn,$bus_name,$owner_name,$final;
             $description = $_POST["description-val"];
             $sql = "INSERT INTO business_page (bus_name, owner_name, description) VALUES ('$bus_name','$owner_name','$description')";
             $conn->query($sql);
             header('Location: '.$final);
         }
         function heading(){
-            global $conn,$final;
+            global $conn,$bus_name,$owner_name,$final;
             $heading = $_POST["heading-val"];
             $sql = "INSERT INTO business_page (bus_name, owner_name, heading) VALUES ('$bus_name','$owner_name','$heading')";
             $conn->query($sql);
