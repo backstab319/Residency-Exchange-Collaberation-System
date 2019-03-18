@@ -50,15 +50,23 @@
             global $conn,$bus_name,$owner_name;
             $sql = "SELECT heading FROM business_page WHERE bus_name='$bus_name' AND owner_name='$owner_name' AND heading !=''";
             $result = $conn->query($sql);
-            $row = $result->fetch_assoc();
-            return $row["heading"];
+            if($result->num_rows > 0){
+                $row = $result->fetch_assoc();
+                return $row["heading"];
+            }else{
+                return "Page Title";
+            }
         }
         function description(){
             global $conn,$bus_name,$owner_name;
             $sql = "SELECT description FROM business_page WHERE bus_name='$bus_name' AND owner_name='$owner_name' AND description !=''";
             $result = $conn->query($sql);
-            $row = $result->fetch_assoc();
-            return $row["description"];
+            if($result->num_rows > 0){
+                $row = $result->fetch_assoc();
+                return $row["description"];
+            }else{
+                return "This is a page description";
+            }
         }
     ?>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
