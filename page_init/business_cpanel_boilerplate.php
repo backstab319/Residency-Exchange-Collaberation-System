@@ -163,6 +163,19 @@
         </div>
     </div>
 
+    <div class="container text-center form-group col-md-4 col-lg-4 mb-2">
+        <h1 class="display-5">Add products and services</h1>
+        <div class="form-group">
+            <form method="POST" action="<?php $cpanel;?>">
+            <input class="form-control mb-2" type="text" name="prod_name" placeholder="Product or Service">
+            <input class="form-control mb-2" type="text" name="prod_des" placeholder="Product or Service Description">
+            <input class="form-control mb-2" type="number" name="prod_pr" placeholder="Product or Service Price">
+            <input class="form-control mb-2" type="text" name="prod_link" placeholder="Product link">
+            <input type="submit" value="Add Product" class="btn btn-outline-dark mb-2" name="addprod">
+            </form>
+        </div>
+    </div>
+
     <?php
         $final = "http://thebackstabproject.hostingerapp.com/".$cpanel;
         $finalpagelink = "http://thebackstabproject.hostingerapp.com/".$pagelink;
@@ -180,6 +193,19 @@
         }
         if($_POST["description"]){
             description();
+        }
+        if($_POST["addprod"]){
+            addproduct();
+        }
+        function addproduct(){
+            global $bus_name, $owner_name, $conn;
+            $prodname = $_POST["prod_name"];
+            $proddes = $_POST["prod_des"];
+            $prodpr = $_POST["prod_pr"];
+            $prodlink = $_POST["prod_link"];
+            $sql = "INSERT INTO business_product VALUES ('$bus_name','$owner_name','$prodname','$proddes','$prodpr','$prodlink')";
+            $conn->query($sql);
+            header('Location: ' . $final);
         }
         function description(){
             global $conn,$bus_name,$owner_name,$final;
