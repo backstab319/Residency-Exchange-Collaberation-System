@@ -44,8 +44,36 @@
     <p class="lead"><?php echo description();?></p>
     </div>
 
+    <div class="container text-center d-flex flex-wrap">
+        <p class="lead"><?php echo business_menu();?></p>
+    </div>
+
 
     <?php
+        function business_menu(){
+            global $conn, $bus_name, $owner_name;
+            $sql = "SELECT * FROM business_product WHERE bus_name='$bus_name' AND owner_name='$owner_name'";
+            $result = $conn->query($sql);
+            if($result->num_rows > 0){
+                business_menu_display($result);
+            }else{
+                return "This Business has not yet provided a menu of their products and services";
+            }
+        }
+        function business_menu_display($menu){
+            while($row = $menu->fetch_assoc()){
+                echo "
+                <div class='card col-lg-3 col-xl-3 mr-2 mb-2'>
+                    <img class='card-img-top' src='".$row['product_link']."' height='200'>
+                    <div class='card-body'>
+                        <h5 class='card-title'>".$row['product_name'].' Price: '.$row['product_price']. 'rs'."</h5>
+                        <p class='card-text'>".$row['product_description']."</p>
+                        <button class='btn btn-outline-dark'>Buy</button>
+                    </div>
+                </div>
+                ";
+            }
+        }
         function heading(){
             global $conn,$bus_name,$owner_name;
             $sql = "SELECT heading FROM business_page WHERE bus_name='$bus_name' AND owner_name='$owner_name' AND heading !=''";
