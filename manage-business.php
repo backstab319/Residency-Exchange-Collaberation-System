@@ -35,6 +35,31 @@
         </navbar>
     </div>
 
+    <?php
+        include "connect.php";
+        $user = $_COOKIE["user"];
+        checkemployeebus();
+        function checkemployeebus(){
+            global $user, $conn;
+            $sql = "SELECT bus_name, owner_name FROM recs_employees_details WHERE emp_name='$user'";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            $emp_bus = $row["bus_name"];
+            $emp_owner = $row["owner_name"];
+            displayemppanel($emp_bus,$emp_owner);
+        }
+        function displayemppanel($emp_bus,$emp_owner){
+            global $conn;
+            $sql = "SELECT * FROM view_business WHERE bus_name='$emp_bus' AND owner_name='$emp_owner'";
+            $reslut = $conn->query($sql);
+            while($row = $result->fetch_assoc()){
+                echo "
+                <div class='container text-center'>
+                    <h3 class='display-7'>" . $row['bus_name'] . "<a class='btn btn-link btn-outline-primary' href='".$row['cpanel_link']."'>Cpanel</a></h3></div>";
+            }
+        }
+    ?>
+
     <div class="container jumbotron text-center">
         <h1 class="display-4">Cpanel</h1>
         <p class="lead">Here you can manage the businesses owned by you.</p>
@@ -42,8 +67,6 @@
 
     <div class="container textcenter">
         <?php
-        include "connect.php";
-        $user = $_COOKIE["user"];
         function business_search(){
             global $user,$conn;
             $sql = "SELECT * FROM view_business WHERE owner_name='$user'";
