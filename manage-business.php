@@ -38,20 +38,41 @@
     <?php
         include "connect.php";
         $user = $_COOKIE["user"];
+        $usertype;
         checkemployeebus();
         function checkemployeebus(){
             global $user, $conn;
             $sql = "SELECT bus_name, owner_name FROM recs_employees_details WHERE emp_name='$user'";
             $result = $conn->query($sql);
-            $row = $result->fetch_assoc();
-            $emp_bus = $row["bus_name"];
-            $emp_owner = $row["owner_name"];
-            displayemppanel($emp_bus,$emp_owner);
+            if($result->num_rows > 0){
+                global $usertype;
+                $usertype = "emp";
+            }
+            
+    ?>
+
+    <div class="container jumbotron text-center">
+        <h1 class="display-4">Cpanel</h1>
+        <?php
+            if($usertype == "emp"){
+                echo '<p class="lead">Here you can manage the businesses in which you work.</p>';
+            }else{
+                echo '<p class="lead">Here you can manage the businesses owned by you.</p>';
+            }
+        ?>
+    </div>
+
+    <?php
+            while($row = $result->fetch_assoc()){
+                $emp_bus = $row["bus_name"];
+                $emp_owner = $row["owner_name"];
+                displayemppanel($emp_bus,$emp_owner);
+            }
         }
         function displayemppanel($emp_bus,$emp_owner){
             global $conn;
             $sql = "SELECT * FROM view_business WHERE bus_name='$emp_bus' AND owner_name='$emp_owner'";
-            $reslut = $conn->query($sql);
+            $result = $conn->query($sql);
             while($row = $result->fetch_assoc()){
                 echo "
                 <div class='container text-center'>
@@ -59,11 +80,6 @@
             }
         }
     ?>
-
-    <div class="container jumbotron text-center">
-        <h1 class="display-4">Cpanel</h1>
-        <p class="lead">Here you can manage the businesses owned by you.</p>
-    </div>
 
     <div class="container textcenter">
         <?php
