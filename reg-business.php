@@ -123,7 +123,7 @@
             $conn->query($sql);
         }
         function createvar(){
-            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn,$varspagelink,$link,$cpanel;
+            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn,$varspagelink,$link,$cpanel,$pagelink;
             $varspagelink = $link."/"."vars.php";
             $mypage = fopen($varspagelink, "w") or die("Unable to create vars page. Please contact our dev team.");
             $content="<?php \$bus_name = '$bus_name';\$owner_name = '$owner_name';\$cpanel = '$cpanel';\$pagelink = '$pagelink'?>";

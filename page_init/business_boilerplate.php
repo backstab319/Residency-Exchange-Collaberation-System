@@ -23,23 +23,7 @@
         }
     ?>
 
-<div class="navbar-section home">
-        <navbar class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
-            <div class="container">
-                <a class="navbar-brand">RECS</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#toggle"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="toggle">
-                    <div class="navbar-menu ml-auto">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="http://thebackstabproject.hostingerapp.com/welcome.php">Home</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </navbar>
-    </div>
+
     <div class="container jumbotron text-center"><h1 class="display-4"><?php echo heading();?></h1>
     <p class="lead"><?php echo description();?></p>
     </div>
@@ -50,6 +34,13 @@
 
 
     <?php
+        $test;
+        $user = $_COOKIE["user"];
+        $page = $bus_name.$owner_name.".php";
+        if(isset($_GET["test"])){
+            $test = $_GET["test"];
+            buy();
+        }
         function business_menu(){
             global $conn, $bus_name, $owner_name;
             $sql = "SELECT * FROM business_product WHERE bus_name='$bus_name' AND owner_name='$owner_name'";
@@ -61,6 +52,7 @@
             }
         }
         function business_menu_display($menu){
+            global $page;
             while($row = $menu->fetch_assoc()){
                 echo "
                 <div class='card col-lg-3 col-xl-3 mr-2 mb-2'>
@@ -68,11 +60,15 @@
                     <div class='card-body'>
                         <h5 class='card-title'>".$row['product_name'].' Price: '.$row['product_price']. 'rs'."</h5>
                         <p class='card-text'>".$row['product_description']."</p>
-                        <button class='btn btn-outline-dark'>Buy</button>
+                        <a class='btn btn-outline-dark' href='".$page."?test=".$row['product_name']."'>Buy</a>
                     </div>
                 </div>
                 ";
             }
+        }
+        function buy(){
+            global $test;
+            echo $test;
         }
         function heading(){
             global $conn,$bus_name,$owner_name;
