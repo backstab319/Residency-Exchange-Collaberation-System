@@ -32,24 +32,19 @@
                         </li>
                         <?php
                         check_business();
-                        check_businessemp();
-                        function check_businessemp(){
-                            global $conn, $user;
-                            $sql = "SELECT * FROM recs_employees_details WHERE emp_name='$user'";
+                        function check_business(){
+                            global $conn,$user;
+                            $sql = "SELECT * FROM view_business WHERE owner_name='$user'";
                             $result = $conn->query($sql);
+                            $sql = "SELECT * FROM recs_employees_details WHERE emp_name='$user'";
+                            $result1 = $conn->query($sql);
                             if($result->num_rows > 0){
                                 echo "
                                 <li class='nav-item'>
                                     <a class='nav-link' href='/manage-business.php'>Manage Business</a>
                                 </li>
                                 ";
-                            }
-                        }
-                        function check_business(){
-                            global $conn,$user;
-                            $sql = "SELECT * FROM view_business WHERE owner_name='$user'";
-                            $result = $conn->query($sql);
-                            if($result->num_rows > 0){
+                            }elseif ($result1->num_rows > 0) {
                                 echo "
                                 <li class='nav-item'>
                                     <a class='nav-link' href='/manage-business.php'>Manage Business</a>

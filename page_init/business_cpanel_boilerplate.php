@@ -49,7 +49,7 @@
         $user = $_COOKIE["user"];
         $sql = "SELECT bus_name, owner_name FROM recs_employees_details WHERE emp_name='$user'";
         $result = $conn->query($sql);
-        if($result->num_rows == 0){
+        if($owner_name == $user){
             include "../../page_init/emp.php";
         }
     ?>

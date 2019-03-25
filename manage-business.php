@@ -53,13 +53,7 @@
 
     <div class="container jumbotron text-center">
         <h1 class="display-4">Cpanel</h1>
-        <?php
-            if($usertype == "emp"){
-                echo '<p class="lead">Here you can manage the businesses in which you work.</p>';
-            }else{
-                echo '<p class="lead">Here you can manage the businesses owned by you.</p>';
-            }
-        ?>
+        <p class="lead">Here you can manage the businesses in which you work or own</p>
     </div>
 
     <?php
