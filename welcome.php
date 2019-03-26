@@ -66,6 +66,17 @@
 
     <div class="container jumbotron text-center mt-2">
         <h1 class="display-4">Welcome to RECS!</h1>
+        <?php
+            checkinfo();
+            function checkinfo(){
+                global $user, $conn;
+                $sql = "SELECT * FROM user_account WHERE name='$user'";
+                $result = $conn->query($sql);
+                if($result->num_rows == 0){
+                    echo "<p class='lead bg-alert'>Please Update your account information</p>";
+                }
+            }
+        ?>
     </div>
 
 
