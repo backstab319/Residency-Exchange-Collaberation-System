@@ -9,6 +9,7 @@
 </head>
 <body>
     <?php
+        include "../connect.php";
         if(!isset($_COOKIE["user"])){
         echo "<div class='container jumbotron text-center mt-2'>
         <p class='lead'>Please login back in again to continue browsing RECS!</p>
@@ -33,6 +34,64 @@
                 </div>
             </div>
         </navbar>
+    </div>
+
+    <div class="container text-center jumbotron">
+    <h1 class='display-4'>Orders</h1>
+    </div>
+
+    <div class="container d-flex justify-content-center text-center">
+    
+    <?php
+        showusers();
+        if($_POST["view"]){
+            viewsel();
+        }
+        function showusers(){
+            global $conn;
+            $sql = "SELECT DISTINCT user_id FROM business_orders";
+            $result = $conn->query($sql);
+            echo "
+                <div class='form-group text-center col-md-4 col-lg-4 mb-2'>
+                <form method='POST' action='vieworders.php'>
+                <label for='sel'>Select user to view order</label>
+                <select id='sel' class='form-control mb-2' name='sel'>
+            ";
+            while($row = $result->fetch_assoc()){
+                echo "<option value='".$row['user_id']."'>".$row['user_id']."</option>";
+            }
+            echo "</select>
+            <input type='submit' value='View order' name='view' class='form-control mb-2'>
+            </form>
+            </div>";
+        }
+        function viewsel(){
+            global $conn;
+            $seluser = $_POST["sel"];
+            $sql = "SELECT * FROM business_orders WHERE user_id='$seluser'";
+            $result = $conn->query($sql);
+            showorder($result);
+        }
+        function showorder($result){
+            echo "<table class='table table-bordered table-striped table-hover col-md-4 col-lg-4 mb-2'><thead class='thead-dark'>
+                <tr>
+                <th>Product</th>
+                <th>Price</th>
+                </thead>
+            ";
+            while($row = $result->fetch_assoc()){
+                $total = $total + $row['product_price'];
+                echo "<tr>
+                    <td>".$row['product_name']."</td>
+                    <td>".$row['product_price']."</td>
+                ";
+            }
+            echo "<tr>
+                <td>Total</td><td>".$total."</td>
+            </tr></table>
+            ";
+        }
+    ?>
     </div>
     
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
