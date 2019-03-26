@@ -38,7 +38,7 @@
     </div>
 
     <div class="container text-center jumbotron">
-        <h1 class="display-4">Account Settings</h1>
+        <h1 class="display-4">Account Information</h1>
         <div class="container text-center col-md-4 col-lg-4">
         <div class="form-group">
             <form method="POST" action="accountinfo.php">
