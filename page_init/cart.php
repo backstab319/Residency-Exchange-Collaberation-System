@@ -38,34 +38,72 @@
 
     <div class="container text-center jumbotron">
         <h1 class="display-4">Cart</h1>
+    </div>
+    <div class="container text-center col-md-4 col-lg-4">
         <?php
         $user = $_COOKIE["user"];
         include "../connect.php";
+        if($_POST["order"]){
+            order();
+        }
         checkcart();
         function checkcart(){
             global $conn, $user;
-            $sql = "SELECT * FROM cart WHERE user='$user'";
-            $result = $conn->query($sql);
-            if($result->num_rows > 0){
-                displaycart($result);
+            $sql = "SELECT * FROM cart WHERE user_id='$user'";
+            $result1 = $conn->query($sql);
+            if($result1->num_rows > 0){
+                checkinfo();
+                displaycart($result1);
             }else{
                 echo "<p class='lead'>Sorry! Your cart is empty!</p>";
             }
         }
-        function displaycart($result){
+        function checkinfo(){
+            global $user, $conn;
+            $sql = "SELECT * FROM user_account WHERE name='$user'";
+            $result = $conn->query($sql);
+            if($result->num_rows == 0){
+                echo "<p class='lead bg-alert'>Please Update your account information to order stuff.</p>";
+                exit();
+            }
+        }
+        function displaycart($result1){
             echo "<table class='table table-bordered table-striped table-hover'><thead class='thead-dark'>
                 <tr>
                 <th>Product</th>
                 <th>Price</th>
                 </thead>
             ";
-            while($row = $result->fetch_assoc()){
+            while($row = $result1->fetch_assoc()){
+                $total = $total + $row['product_price'];
                 echo "<tr>
                     <td>".$row['product_name']."</td>
                     <td>".$row['product_price']."</td>
                 ";
             }
-            echo "</table>";
+            echo "<tr>
+                <td>Total</td><td>".$total."</td>
+            </tr></table>
+                <form method='POST' action='http://thebackstabproject.hostingerapp.com/page_init/cart.php'>
+                <input type='submit' value='Order' name='order' class='form-control'>
+                </form>
+            ";
+        }
+        function order(){
+            global $conn, $user;
+            $sql = "SELECT * FROM cart WHERE user_id='$user'";
+            $result = $conn->query($sql);
+            while($row = $result->fetch_assoc()){
+                $bus_name = $row["bus_name"];
+                $owner_name = $row["owner_name"];
+                $user_id = $row["user_id"];
+                $pname = $row["product_name"];
+                $price = $row["product_price"];
+                $sql = "INSERT INTO business_orders VALUES('$bus_name','$owner_name','$user_id','$pname',$price)";
+                $conn->query($sql);
+            }
+            $sql = "DELETE FROM cart WHERE user_id='$user'";
+            $conn->query($sql);
         }
         ?>
     </div>
