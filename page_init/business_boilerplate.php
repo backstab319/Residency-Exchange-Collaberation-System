@@ -21,6 +21,7 @@
         </div>";
         exit();
         }
+        $user = $_COOKIE["user"];
     ?>
 
 <div class="navbar-section home">
@@ -37,6 +38,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="../../page_init/cart.php">Cart</a>
                             </li>
+                            <?php echo checkifemp();?>
                         </ul>
                     </div>
                 </div>
@@ -55,8 +57,6 @@
 
 
     <?php
-        
-        $user = $_COOKIE["user"];
         $page = $bus_name.$owner_name.".php";
         $pname;
         $price;
@@ -116,6 +116,26 @@
                 return $row["description"];
             }else{
                 return "This is a page description";
+            }
+        }
+        function checkifemp(){
+            global $conn,$user,$bus_name,$owner_name;
+            $sql = "SELECT * FROM recs_employees_details WHERE emp_name= '$user'";
+            $result = $conn->query($sql);
+            if($result->num_rows > 0){
+                return '
+                <li class="nav-item">
+                <a class="nav-link" href="../../page_init/vieworders.php">View orders</a>
+            </li>
+                ';
+            }elseif($user == $owner_name){
+                return '
+                <li class="nav-item">
+                <a class="nav-link" href="../../page_init/vieworders.php">View orders</a>
+            </li>
+                ';
+            }else{
+                return "";
             }
         }
     ?>
