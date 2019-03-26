@@ -53,6 +53,9 @@
                             }
                         }
                         ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="account/accountinfo.php">Account info</a>
+                        </li>
                     </ul>
                     </div>
                 </div>
