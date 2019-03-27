@@ -55,6 +55,13 @@
                 checkinfo();
                 displaycart($result1);
             }else{
+                orderplaced();
+            }
+        }
+        function orderplaced($val){
+            if($val == 1){
+                echo "<p class='lead'>Your order has been placed!</p>";
+            }else{
                 echo "<p class='lead'>Sorry! Your cart is empty!</p>";
             }
         }
@@ -104,6 +111,7 @@
             }
             $sql = "DELETE FROM cart WHERE user_id='$user'";
             $conn->query($sql);
+            orderplaced(1);
         }
         ?>
     </div>
