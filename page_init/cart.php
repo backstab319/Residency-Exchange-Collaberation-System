@@ -46,6 +46,10 @@
         if($_POST["order"]){
             order();
         }
+        if($_GET["del"]){
+            $delitem = $_GET["del"];
+            delitemfun($delitem);
+        }
         checkcart();
         function checkcart(){
             global $conn, $user;
@@ -79,6 +83,7 @@
                 <tr>
                 <th>Product</th>
                 <th>Price</th>
+                <th>Remove</th>
                 </thead>
             ";
             while($row = $result1->fetch_assoc()){
@@ -86,6 +91,7 @@
                 echo "<tr>
                     <td>".$row['product_name']."</td>
                     <td>".$row['product_price']."</td>
+                    <td><a class='btn btn-outline-dark' href='cart.php?del=".$row['product_name']."'>Delete</a></td>
                 ";
             }
             echo "<tr>
@@ -112,6 +118,11 @@
             $sql = "DELETE FROM cart WHERE user_id='$user'";
             $conn->query($sql);
             orderplaced(1);
+        }
+        function delitemfun($delitem){
+            global $conn, $user;
+            $sql = "DELETE FROM cart WHERE product_name='$delitem'";
+            $conn->query($sql);
         }
         ?>
     </div>
