@@ -48,7 +48,7 @@
         }
         if($_GET["del"]){
             $delitem = $_GET["del"];
-            delitemfun($delitem);
+            delitem($delitem);
         }
         checkcart();
         function checkcart(){
@@ -91,7 +91,7 @@
                 echo "<tr>
                     <td>".$row['product_name']."</td>
                     <td>".$row['product_price']."</td>
-                    <td><a class='btn btn-outline-dark' href='cart.php?del=".$row['product_name']."'>Delete</a></td>
+                    <td><button class='btn btn-outline-dark' href='cart.php?del=".$row['product_name']."'>Delete</button></td>
                 ";
             }
             echo "<tr>
@@ -119,7 +119,7 @@
             $conn->query($sql);
             orderplaced(1);
         }
-        function delitemfun($delitem){
+        function delitem($delitem){
             global $conn, $user;
             $sql = "DELETE FROM cart WHERE product_name='$delitem'";
             $conn->query($sql);
