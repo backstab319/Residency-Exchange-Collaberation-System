@@ -106,13 +106,16 @@
             global $conn, $user;
             $sql = "SELECT * FROM cart WHERE user_id='$user'";
             $result = $conn->query($sql);
+            $sql1 = "SELECT address FROM user_account WHERE name=''$user";
+            $result1 = $conn->query($sql);
+            $address = $result1->fetch_assoc();
             while($row = $result->fetch_assoc()){
                 $bus_name = $row["bus_name"];
                 $owner_name = $row["owner_name"];
                 $user_id = $row["user_id"];
                 $pname = $row["product_name"];
                 $price = $row["product_price"];
-                $sql = "INSERT INTO business_orders VALUES('$bus_name','$owner_name','$user_id','$pname',$price)";
+                $sql = "INSERT INTO business_orders VALUES('$bus_name','$owner_name','$user_id','$pname',$price,'$address')";
                 $conn->query($sql);
             }
             $sql = "DELETE FROM cart WHERE user_id='$user'";
