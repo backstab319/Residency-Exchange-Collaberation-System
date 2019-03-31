@@ -28,6 +28,9 @@
                     <div class="navbar-menu ml-auto">
                     <ul class="navbar-nav">
                         <li class="nav-item">
+                            <a class="nav-link" href="page_init/myorder.php">My orders</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/reg-business.php">Register business</a>
                         </li>
                         <?php
