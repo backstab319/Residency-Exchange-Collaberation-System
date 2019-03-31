@@ -72,6 +72,8 @@
             $pagelink;
             $cpanel;
             $varspagelink;
+            $vieworder;
+            $vieworderlink;
             process_reg();
         }
         function process_reg(){
@@ -87,6 +89,7 @@
             makedir();
             makehomepage();
             makecpanel();
+            vieworder();
             createvar();
             $sql = "INSERT INTO business_reg (bus_name, owner_name, owner_contact, owner_address, business_type, page_link) VALUES('$bus_name','$owner_name',$owner_number,'$bus_address','$bus_type','$pagelink')";
             if($conn->query($sql) === TRUE){
@@ -95,6 +98,15 @@
                 echo "Error registering business. Please contact our dev team.";
             }
             view_business();
+        }
+        function vieworder(){
+            global $link,$bus_name,$owner_name,$vieworder,$vieworderlink,$conn;
+            $vieworder = $link."/".$bus_name.$owner_name."vieworder.php";
+            $vieworderlink = $bus_name.$owner_name."vieworder.php";
+            $mypage = fopen($vieworder, "w") or die("Unable to create order page. Please contact our dev team.");
+            $content="<?php include '../../page_init/vieworders.php';?>";
+            fwrite($mypage,$content);
+            fclose($mypage);
         }
         function makedir(){
             global $bus_name, $owner_name, $link;
@@ -123,10 +135,10 @@
             $conn->query($sql);
         }
         function createvar(){
-            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn,$varspagelink,$link,$cpanel,$pagelink;
+            global $bus_name,$owner_name,$owner_number,$bus_address,$bus_type,$conn,$varspagelink,$link,$cpanel,$pagelink,$vieworderlink;
             $varspagelink = $link."/"."vars.php";
             $mypage = fopen($varspagelink, "w") or die("Unable to create vars page. Please contact our dev team.");
-            $content="<?php \$bus_name = '$bus_name';\$owner_name = '$owner_name';\$cpanel = '$cpanel';\$pagelink = '$pagelink'?>";
+            $content="<?php \$bus_name = '$bus_name';\$owner_name = '$owner_name';\$cpanel = '$cpanel';\$pagelink = '$pagelink';\$vieworder = '$vieworderlink'?>";
             fwrite($mypage,$content);
             fclose($mypage);
             $sql = "INSERT INTO business_vars (bus_name, owner_name, vars_link) VALUES ('$bus_name','$owner_name','$varspagelink')";
