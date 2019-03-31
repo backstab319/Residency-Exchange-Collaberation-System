@@ -2,14 +2,15 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <title>Page Title</title>
+    <title>View orders</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
     <?php
-        include "../connect.php";
+        include "vars.php";
+        include "../../connect.php";
         if(!isset($_COOKIE["user"])){
         echo "<div class='container jumbotron text-center mt-2'>
         <p class='lead'>Please login back in again to continue browsing RECS!</p>
@@ -43,12 +44,14 @@
     <div class="container d-flex justify-content-center col-md-4 col-lg-4 text-center">
     
     <?php
+        $delivadd;
         showusers(1);
         if($_POST["view"]){
             viewsel();
         }
+        $seluser;
         function showusers($val){
-            global $conn;
+            global $conn, $bus_name;
             $sql = "SELECT DISTINCT user_id FROM business_orders";
             $result = $conn->query($sql);
             if($result->num_rows == 0){
@@ -57,7 +60,7 @@
             }
             echo "
                 <div class='form-group text-center col-md-6 col-lg-6 mb-2'>
-                <form method='POST' action='vieworders.php'>
+                <form method='POST' action='".$vieworderlink."'>
             ";
             if($val == 1){
                 echo "<label for='sel'>Select user to view order</label>";
@@ -79,13 +82,18 @@
             </div>";
         }
         function viewsel(){
-            global $conn;
+            global $conn, $delivadd, $seluser;
             $seluser = $_POST["sel"];
             $sql = "SELECT * FROM business_orders WHERE user_id='$seluser'";
             $result = $conn->query($sql);
+            $sql1 = "SELECT user_address FROM business_orders WHERE user_id='$seluser'";
+            $result1 = $conn->query($sql1);
+            $row = $result1->fetch_assoc();
+            $delivadd = $row["user_address"];
             showorder($result);
         }
         function showorder($result){
+            global $delivadd, $seluser, $conn, $bus_name;
             echo "<table class='table table-bordered table-striped table-hover col-md-4 col-lg-4 mb-2'><thead class='thead-dark'>
                 <tr>
                 <th>Product</th>
@@ -103,6 +111,15 @@
                 <td>Total</td><td>".$total."</td>
             </tr></table>
             ";
+            echo "<div class='row container text-center col-md-6 col-lg-6'>
+                <p>Delivery address ".$delivadd."</p>
+            ";
+            $sql = "SELECT * FROM order_protection WHERE user='$seluser' AND bus_name='$bus_name'";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            if($row["product_received"] == 1){
+                echo "The user has payed and received the product</div>";
+            }
         }
     ?>
     </div>
@@ -112,14 +129,23 @@
         <div class="container text-center d-flex justify-content-center">
             <?php
                 showusers(0);
+                $del;
                 if($_POST["del-sel"]){
+                    $del = $_POST["del"];
                     delorder();
                 }
                 function delorder(){
-                    global $conn;
+                    global $conn, $del, $bus_name;
                     $del = $_POST["del"];
-                    $sql = "DELETE FROM business_orders WHERE user_id='$del'";
-                    $conn->query($sql);
+                    $sql = "SELECT * FROM order_protection WHERE user='$del' AND bus_name='$bus_name'";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    if($row["product_received"] == 1){
+                        $sql = "DELETE FROM business_orders WHERE user_id='$del'";
+                        $conn->query($sql);
+                    }else{
+                        echo "The user has not received nor payed";
+                    }
                 }
             ?>
         </div>
