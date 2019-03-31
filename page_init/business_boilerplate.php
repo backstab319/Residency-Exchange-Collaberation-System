@@ -119,19 +119,19 @@
             }
         }
         function checkifemp(){
-            global $conn,$user,$bus_name,$owner_name;
+            global $conn,$user,$bus_name,$owner_name,$vieworderlink;
             $sql = "SELECT * FROM recs_employees_details WHERE emp_name= '$user'";
             $result = $conn->query($sql);
             if($result->num_rows > 0){
                 return '
                 <li class="nav-item">
-                <a class="nav-link" href="../../page_init/vieworders.php">View orders</a>
+                <a class="nav-link" href="'.$vieworderlink.'">View orders</a>
             </li>
                 ';
             }elseif($user == $owner_name){
                 return '
                 <li class="nav-item">
-                <a class="nav-link" href="../../page_init/vieworders.php">View orders</a>
+                <a class="nav-link" href="'.$vieworderlink.'">View orders</a>
             </li>
                 ';
             }else{
