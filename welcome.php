@@ -82,8 +82,79 @@
         ?>
     </div>
 
+    <div class="container text-center col-lg-6 col-xl-6 my-4">
+        <h1 class="display-4">Messages</h1>
+                <div id="message"></div>
+                <script>
+        function chat(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(xhttp.readyState == 4 && xhttp.status == 200){
+                    document.getElementById('message').innerHTML = xhttp.responseText;
+                }
+            }
+            xhttp.open('GET','talk.php', true);
+            xhttp.send();
+        }
+        setInterval(function(){chat()}, 1000)
+    </script>
+    </div>
 
-    <div class="container jumbotron text-center">
+    <div class="container text-center col-lg-6 col-xl-6 my-4">
+        <h1 class="display-4">Send Message</h1>
+        <form action="welcome.php" method="POST">
+            <div class="form-group mb-2">
+                <div class="row">
+                    <textarea name="message" cols="30" rows="5" class="form-control mb-2"></textarea>
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <input type="text" name="receiver" class="form-control mb-2 col-lg-4 col-xl-4" placeholder="Receiver">
+                </div>
+                <div class="row d-flex justify-content-center">
+                    <input type="submit" value="Send" name="send" class="form-control mb-2 btn btn-outline-dark col-lg-4 col-xl-4">
+                </div>
+            </div>
+        </form>
+        <?php
+            if(isset($_POST["send"])){
+                sendmessage();
+            }
+            function sendmessage(){
+                global $user;
+                $receiver = $_POST["receiver"];
+                $message = $_POST["message"];
+                if(($receiver and $message) != NULL){
+                    $sql = "INSERT INTO talk VALUES('$user','$receiver','$message')";
+                    $conn->query($sql);
+                }else{
+                    echo "<p class='lead text-center'>Please check the message or the receivers name</p>";
+                }
+            }
+        ?>
+    </div>
+
+    <div class="container text-center col-lg-6 col-xl-6 my-4">
+        <h1 class="display-4">Delete Messages</h1>
+        <form action="welcome.php" method="POST">
+            <div class="form-group">
+                <div class="row d-flex justify-content-center">
+                    <input type="submit" value="Delete" name="delete" class="form-control col-lg-4 col-xl-4">
+                </div>
+            </div>
+        </form>
+        <?php
+            if(isset($_POST["delete"])){
+                deletemessage();
+            }
+            function deletemessage(){
+                global $user, $conn;
+                $sql = "DELETE FROM talk WHERE receiver='$user'";
+                $conn->query($sql);
+            }
+        ?>
+    </div>
+
+    <div class="container jumbotron text-center my-4">
         <h1 class="display-4">Services available.</h1>
         <?php
             $bus_name;
