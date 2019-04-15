@@ -49,11 +49,17 @@
             $result1 = $conn->query($sql1);
             $sql = "SELECT * FROM business_orders WHERE user_id='$user'";
             $result = $conn->query($sql);
-            if($result->num_rows == 0){
-                echo order_status(0);
+            $sql2 = "SELECT * FROM order_protection WHERE user='$user' AND bus_name='$bus_name'";
+            $result2 = $conn->query($sql2);
+            if($result2->num_rows > 0){
+                if($result->num_rows == 0){
+                    echo order_status(0);
+                }else{
+                    echo "<h1 class='display-4'>Your order is on the way</h1>";
+                    verify_payment($result1);
+                }
             }else{
-                echo "<h1 class='display-4'>Your order is on the way</h1>";
-                verify_payment($result1);
+                echo "<h1 class='display-4'>You have no orders</h1>";
             }
         }
         function order_status($result){
@@ -74,7 +80,7 @@
         }
         function verifyorder($bus_name){
             global $conn, $user;
-            $sql = "UPDATE order_protection SET product_received=1 WHERE user='$user' AND bus_name='$bus_name'";
+            $sql = "DELETE FROM order_protection WHERE user='$user' AND bus_name='$bus_name'";
             $conn->query($sql);
             echo "<p class='lead'>Thank You!</p>";
         }
