@@ -91,7 +91,7 @@
                 echo "<tr>
                     <td>".$row['product_name']."</td>
                     <td>".$row['product_price']."</td>
-                    <td><button class='btn btn-outline-dark' href='cart.php?del=".$row['product_name']."'>Delete</button></td>
+                    <td><a class='btn btn-outline-dark' href='cart.php?del=".$row['product_name']."'>Delete</a></td>
                 ";
             }
             echo "<tr>
@@ -116,18 +116,24 @@
             $bus_name = $row['bus_name'];
             $sql2 = "INSERT INTO order_protection(user, bus_name) VALUES ('$user','$bus_name')";
             $result2 = $conn->query($sql2);
-            while($row = $result->fetch_assoc()){
-                $bus_name = $row["bus_name"];
-                $owner_name = $row["owner_name"];
-                $user_id = $row["user_id"];
-                $pname = $row["product_name"];
-                $price = $row["product_price"];
-                $sql = "INSERT INTO business_orders VALUES('$bus_name','$owner_name','$user_id','$pname',$price,'$address')";
-                $conn->query($sql);
+            $sql = "SELECT * FROM cart WHERE user_id='$user'";
+            $result = $conn->query($sql);
+            while($roww = $result->fetch_assoc()){
+                $bus_name = $roww["bus_name"];
+                $owner_name = $roww["owner_name"];
+                $user_id = $roww["user_id"];
+                $pname = $roww["product_name"];
+                $price = $roww["product_price"];
+                oritem($bus_name,$owner_name,$user_id,$pname,$price,$address);
             }
             $sql = "DELETE FROM cart WHERE user_id='$user'";
             $conn->query($sql);
             orderplaced(1);
+        }
+        function oritem($bus_name,$owner_name,$user_id,$pname,$price,$address){
+            global $conn;
+            $sql = "INSERT INTO business_orders VALUES('$bus_name','$owner_name','$user_id','$pname','$price','$address')";
+            $conn->query($sql);
         }
         function delitem($delitem){
             global $conn, $user;
