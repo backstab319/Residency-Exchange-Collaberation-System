@@ -42,13 +42,10 @@
         if(isset($_GET["verify"])){
             verifyorder($_GET["bus_name"]);
         }
-        $result1;
         function checkifordered(){
-            global $user, $conn, $result1;
+            global $user, $conn;
             $sql1 = "SELECT DISTINCT bus_name FROM business_orders WHERE user_id='$user'";
             $result1 = $conn->query($sql1);
-            $sql = "SELECT * FROM business_orders WHERE user_id='$user'";
-            $result = $conn->query($sql);
             $sql2 = "SELECT * FROM order_protection WHERE user='$user' AND bus_name='$bus_name'";
             $result2 = $conn->query($sql2);
             if($result2->num_rows > 0){
