@@ -104,13 +104,15 @@
         }
         function order(){
             global $conn, $user;
+            //fetch cart of user
             $sql = "SELECT * FROM cart WHERE user_id='$user'";
             $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            //fetch address of user
             $sql1 = "SELECT address FROM user_account WHERE name='$user'";
             $result1 = $conn->query($sql1);
             $row1 = $result1->fetch_assoc();
             $address = $row1["address"];
-            $row = $result->fetch_assoc();
             $bus_name = $row['bus_name'];
             $sql2 = "INSERT INTO order_protection(user, bus_name) VALUES ('$user','$bus_name')";
             $result2 = $conn->query($sql2);
