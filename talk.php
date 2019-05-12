@@ -1,4 +1,9 @@
 <?php
+    function message($meshead,$mesbod,$mesfoot){
+        $user = $_COOKIE["user"];
+        $message = $meshead.$mesbod.$mesfoot;
+        setcookie("mes".$user,$message,time()+180000,"/");
+    }
     include "connect.php";
     $user = $_COOKIE["user"];
     selectmessages();
@@ -9,7 +14,7 @@
         showmessages($result);
     }
     function showmessages($result){
-        echo "<table class='table table-bordered table-striped table-hover'>
+        $meshead = "<table class='table table-bordered table-striped table-hover'>
         <thead class='thead-dark'>
                 <tr>
                 <th>Sender</th>
@@ -17,8 +22,11 @@
                 </tr>
             </thead>";
         while($row = $result->fetch_assoc()){
-                echo "<tr><td>".$row['sender']."</td><td>".$row['message']."</td></tr>";
+                $mesbod= $mesbod . "<tr><td>".$row['sender']."</td><td>".$row['message']."</td></tr>";
         }
-        echo "</table>";
+        $mesfoot = "</table>";
+        message($meshead,$mesbod,$mesfoot);
+        $user = $_COOKIE["user"];
+        echo $_COOKIE["mes".$user];
     }
 ?>
