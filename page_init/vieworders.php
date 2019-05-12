@@ -42,7 +42,7 @@
     </div>
 
     <div class="container d-flex justify-content-center col-md-4 col-lg-4 text-center">
-    
+    <div class="container-fluid">
     <?php
         $delivadd;
         showusers(1);
@@ -64,10 +64,10 @@
             ";
             if($val == 1){
                 echo "<label for='sel'>Select user to view order</label>";
-                echo "<select id='sel' class='form-control btn btn-outline-dark mb-2' name='sel'>";
+                echo "<select id='sel' class='form-control mb-2' name='sel'>";
             }else{
                 echo "<label for='sel'>Delete orders</label>";
-                echo "<select id='sel' class='form-control btn btn-outline-dark mb-2' name='del'>";
+                echo "<select id='sel' class='form-control mb-2' name='del'>";
             }
             while($row = $result->fetch_assoc()){
                 echo "<option value='".$row['user_id']."'>".$row['user_id']."</option>";
@@ -94,7 +94,7 @@
         }
         function showorder($result){
             global $delivadd, $seluser, $conn, $bus_name;
-            echo "<table class='table table-bordered table-striped table-hover col-md-4 col-lg-4 mb-2'><thead class='thead-dark'>
+            echo "<div class='container'><table class='table table-bordered table-striped table-hover col-md-4 col-lg-4 mb-2'><thead class='thead-dark'>
                 <tr>
                 <th>Product</th>
                 <th>Price</th>
@@ -109,10 +109,10 @@
             }
             echo "<tr>
                 <td>Total</td><td>".$total."</td>
-            </tr></table>
+            </tr></table></div>
             ";
             echo "<div class='row container text-center col-md-6 col-lg-6'>
-                <p>Delivery address ".$delivadd."</p>
+                <p class='lead text-center text-justify'>Delivery address ".$delivadd."</p>
             ";
             $sql = "SELECT * FROM order_protection WHERE user='$seluser' AND bus_name='$bus_name'";
             $result = $conn->query($sql);
@@ -123,10 +123,11 @@
         }
     ?>
     </div>
+    </div>
 
     <div class="container text-center col-md-6 col-lg-6">
         <h1 class="display-4">Remove completed orders</h1>
-        <div class="container text-center d-flex justify-content-center">
+        <div class="text-center d-flex justify-content-center">
             <?php
                 showusers(0);
                 $del;
@@ -144,7 +145,7 @@
                         $sql = "DELETE FROM business_orders WHERE user_id='$del'";
                         $conn->query($sql);
                     }else{
-                        echo "The user has not received nor payed";
+                        echo "The user has not received nor paid";
                     }
                 }
             ?>
