@@ -52,7 +52,7 @@
                 <form method="POST" action="/index.php">
                 <input class="form-control mb-2" type="text" name="username" placeholder="Username">
                 <input class="form-control mb-2" type="password" name="pass" placeholder="Password">
-                <input type="submit" value="Login" name="submit" class="btn btn-outline-dark btn-block mb-2">
+                <input type="submit" value="Login" name="submit" class="btn btn-outline-primary btn-block mb-2">
                 </form>
             </div>
         </div>
@@ -65,7 +65,7 @@
             <input class="form-control mb-2" type="text" name="newusername" placeholder="Enter Username">
             <input class="form-control mb-2" type="password" name="newpassword" placeholder="Enter Password">
             <input class="form-control mb-2" type="password" name="newpassword1" placeholder="Re-enter Password">
-            <input type="submit" value="Sign up" name="newsubmit" class="btn btn-outline-dark btn-block mb-2">
+            <input type="submit" value="Sign up" name="newsubmit" class="btn btn-outline-primary btn-block mb-2">
             </form>
             </div>
         </div>
