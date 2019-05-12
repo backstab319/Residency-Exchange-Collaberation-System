@@ -64,19 +64,19 @@
             ";
             if($val == 1){
                 echo "<label for='sel'>Select user to view order</label>";
-                echo "<select id='sel' class='form-control mb-2' name='sel'>";
+                echo "<select id='sel' class='form-control btn btn-outline-dark mb-2' name='sel'>";
             }else{
                 echo "<label for='sel'>Delete orders</label>";
-                echo "<select id='sel' class='form-control mb-2' name='del'>";
+                echo "<select id='sel' class='form-control btn btn-outline-dark mb-2' name='del'>";
             }
             while($row = $result->fetch_assoc()){
                 echo "<option value='".$row['user_id']."'>".$row['user_id']."</option>";
             }
             echo "</select>";
             if($val == 1){
-                echo "<input type='submit' value='View order' name='view' class='form-control mb-2'>";
+                echo "<input type='submit' value='View order' name='view' class='form-control btn btn-outline-dark mb-2'>";
             }else{
-                echo "<input type='submit' value='Delete order' name='del-sel' class='form-control mb-2'>";
+                echo "<input type='submit' value='Delete order' name='del-sel' class='form-control btn btn-outline-dark mb-2'>";
             }
             echo "</form>
             </div>";
