@@ -90,7 +90,7 @@
                     <div class='card-body'>
                         <h5 class='card-title'>".$row['product_name'].' Price: '.$row['product_price']. 'rs'."</h5>
                         <p class='card-text'>".$row['product_description']."</p>
-                        <a class='btn btn-outline-dark' href='".$page."?pname=".$row['product_name']."&price=".$row['product_price']."'>Buy</a>
+                        <a class='btn btn-outline-primary' href='".$page."?pname=".$row['product_name']."&price=".$row['product_price']."'>Buy</a>
                     </div>
                 </div>
                 ";

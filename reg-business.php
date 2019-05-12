@@ -34,10 +34,11 @@
             </div>
         </navbar>
     </div>
-
-    <div class="container text-center jumbotron">
-        <h1 class="display-4">Register your business</h1>
-        <p class="lead">Please use the following provided tools to initialise your business with ease!</p>
+    
+    <div class="register">
+    <div class="container text-center jumbotron jumbo">
+        <h1 class="display-4 text-light">Register your business</h1>
+        <p class="lead text-light">Please use the following provided tools to initialise your business with ease!</p>
     </div>
 
     <div class="container d-flex justify-content-center text-center">
@@ -47,7 +48,7 @@
                 <input class="form-control mb-2" type="number" name="number" placeholder="Number">
                 <input class="form-control mb-2" type="text" name="address" placeholder="Business address">
                 <div class="form-group">
-                    <label for="bus_type">Business type:</label>
+                    <label for="bus_type" class="text-light">Business type:</label>
                     <select class="form-control" name="bus_type" id="bus_type">
                         <option value="hotel">Hotel</option>
                         <option value="grocery">Grocery</option>
@@ -55,7 +56,7 @@
                         <option value="mall">Mall</option>
                     </select>
                 </div>
-                <input type="submit" value="Register!" class="btn btn-outline-dark" name="reg">
+                <input type="submit" value="Register!" class="btn btn-primary" name="reg">
             </form>
         </div>
     </div>
@@ -146,6 +147,7 @@
         }
         $conn->close();
     ?>
+    </div>
     </div>
 
 

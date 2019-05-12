@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="utf-8">
-    <title>Page Title</title>
+    <title>My orders</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../style.css">
@@ -44,19 +44,12 @@
         }
         function checkifordered(){
             global $user, $conn;
-            $sql1 = "SELECT DISTINCT bus_name FROM business_orders WHERE user_id='$user'";
-            $result1 = $conn->query($sql1);
-            $sql2 = "SELECT * FROM order_protection WHERE user='$user' AND bus_name='$bus_name'";
-            $result2 = $conn->query($sql2);
-            if($result2->num_rows > 0){
-                if($result->num_rows == 0){
-                    echo order_status(0);
-                }else{
-                    echo "<h1 class='display-4'>Your order is on the way</h1>";
-                    verify_payment($result1);
-                }
+            $sql = "SELECT DISTINCT bus_name FROM business_orders WHERE user_id='$user'";
+            $result = $conn->query($sql);
+            if($result->num_rows > 0){
+                verify_payment($result);
             }else{
-                echo "<h1 class='display-4'>You have no orders</h1>";
+                echo order_status(0);
             }
         }
         function order_status($result){
@@ -70,7 +63,7 @@
                 echo "<div class='container text-center jumbotron col-md-4 col-lg-4'>
                             <h1 class='display-4'>Order verification from ".$row['bus_name']."</h1>
                             <label>Please press the verify button only if you have received your order
-                            <a class='btn btn-outline-dark' href='myorder.php?verify=1&bus_name=".$row['bus_name']."'>Received order</a>
+                            <a class='btn btn-outline-primary' href='myorder.php?verify=1&bus_name=".$row['bus_name']."'>Received order</a>
                             </label>
                     </div>";
             }

@@ -1,3 +1,31 @@
 .home{
     padding-bottom: 4em;
 }
+.background{
+    background: url(/img/main.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 665px;
+}
+.overlay-h{
+    background: rgba(0, 0, 0, 0.3);
+}
+.overlay{
+    height: 665px;
+    background: rgba(0, 0, 0, 0.3);
+}
+.manage{
+    background: url(/img/manage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 600px;
+}
+.register{
+    background: url(/img/register.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 600px;
+}
+.jumbo{
+    background: none;
+}

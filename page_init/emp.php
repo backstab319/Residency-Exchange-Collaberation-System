@@ -1,7 +1,7 @@
 <div class="container text-center col-md-4 col-lg-4 mb-2">
         <h1 class="display-5">View Employees</h1>
         <table class="table table-bordered table-striped table-hover">
-        <thead class="thead-dark">
+        <thead class="thead-primary">
         <tr>
         <th>Employee Name</th>
         <th>Employee Phone number</th>
@@ -36,7 +36,7 @@
             <form method="POST" action="<?php $cpanel;?>">
             <input class="form-control mb-2" type="text" name="emp" placeholder="Employee Name">
             <input class="form-control mb-2" type="text" name="emp-phone" placeholder="Employee phone number">
-            <input type="submit" value="Add" class="btn btn-outline-dark mb-2" name="add">
+            <input type="submit" value="Add" class="btn btn-outline-primary mb-2" name="add">
             </form>
         </div>
     </div>
@@ -72,7 +72,7 @@
                             echo "There are no employees to delete.";
                         }
                     ?>
-            <input type="submit" value="Delete" class="btn btn-outline-dark mb-2" name="delete">
+            <input type="submit" value="Delete" class="btn btn-outline-primary mb-2" name="delete">
             </form>
         </div>
     </div>
@@ -87,7 +87,7 @@
             </select>
             <input class="form-control mb-2" type="text" name="data" placeholder="Data to be edited">
             <input class="form-control mb-2" type="text" name="replace" placeholder="Data to be edited to">
-            <input type="submit" value="Change" class="btn btn-outline-dark mb-2" name="edit">
+            <input type="submit" value="Change" class="btn btn-outline-primary mb-2" name="edit">
             </form>
         </div>
     </div>

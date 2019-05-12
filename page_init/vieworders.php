@@ -74,9 +74,9 @@
             }
             echo "</select>";
             if($val == 1){
-                echo "<input type='submit' value='View order' name='view' class='form-control btn btn-outline-dark mb-2'>";
+                echo "<input type='submit' value='View order' name='view' class='form-control btn btn-outline-primary mb-2'>";
             }else{
-                echo "<input type='submit' value='Delete order' name='del-sel' class='form-control btn btn-outline-dark mb-2'>";
+                echo "<input type='submit' value='Delete order' name='del-sel' class='form-control btn btn-outline-primary mb-2'>";
             }
             echo "</form>
             </div>";
@@ -140,8 +140,7 @@
                     $del = $_POST["del"];
                     $sql = "SELECT * FROM order_protection WHERE user='$del' AND bus_name='$bus_name'";
                     $result = $conn->query($sql);
-                    $row = $result->fetch_assoc();
-                    if($row["product_received"] == 1){
+                    if($result->num_rows == 0){
                         $sql = "DELETE FROM business_orders WHERE user_id='$del'";
                         $conn->query($sql);
                     }else{

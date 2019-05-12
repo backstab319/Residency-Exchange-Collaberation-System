@@ -111,7 +111,7 @@
                     <input type="text" name="receiver" class="form-control mb-2 col-lg-4 col-xl-4" placeholder="Receiver">
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <input type="submit" value="Send" name="send" class="form-control mb-2 btn btn-outline-dark col-lg-4 col-xl-4">
+                    <input type="submit" value="Send" name="send" class="form-control mb-2 btn btn-outline-primary col-lg-4 col-xl-4">
                 </div>
             </div>
         </form>
@@ -120,7 +120,7 @@
                 sendmessage();
             }
             function sendmessage(){
-                global $user;
+                global $user,$conn;
                 $receiver = $_POST["receiver"];
                 $message = $_POST["message"];
                 if(($receiver and $message) != NULL){
@@ -138,7 +138,7 @@
         <form action="welcome.php" method="POST">
             <div class="form-group">
                 <div class="row d-flex justify-content-center">
-                    <input type="submit" value="Delete" name="delete" class="form-control col-lg-4 col-xl-4">
+                    <input type="submit" value="Delete" name="delete" class="form-control btn btn-outline-primary col-lg-4 col-xl-4">
                 </div>
             </div>
         </form>

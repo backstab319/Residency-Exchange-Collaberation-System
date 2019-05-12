@@ -43,33 +43,34 @@
     </div>
 
 
-
+    <div class="background d-flex align-items-center">
     <div class="container">
         <div class="row">
         <div class="container col-md-4 col-lg-4 text-center">
-            <h1 class="display-4">Login</h1>
+            <h1 class="display-4 text-light">Login</h1>
             <div class="form-group">
                 <form method="POST" action="/index.php">
                 <input class="form-control mb-2" type="text" name="username" placeholder="Username">
                 <input class="form-control mb-2" type="password" name="pass" placeholder="Password">
-                <input type="submit" value="Login" name="submit" class="btn btn-outline-primary btn-block mb-2">
+                <input type="submit" value="Login" name="submit" class="btn btn-primary btn-block mb-2">
                 </form>
             </div>
         </div>
 
 
         <div class="container col-md-4 col-lg-4 text-center">
-            <h1 class="display-4">Sign up</h1>
+            <h1 class="display-4 text-primary">Sign up</h1>
             <div class="form-group">
             <form method="POST" action="/index.php">
             <input class="form-control mb-2" type="text" name="newusername" placeholder="Enter Username">
             <input class="form-control mb-2" type="password" name="newpassword" placeholder="Enter Password">
             <input class="form-control mb-2" type="password" name="newpassword1" placeholder="Re-enter Password">
-            <input type="submit" value="Sign up" name="newsubmit" class="btn btn-outline-primary btn-block mb-2">
+            <input type="submit" value="Sign up" name="newsubmit" class="btn btn-primary btn-block mb-2">
             </form>
             </div>
         </div>
         </div>
+    </div>
     </div>
 
 
@@ -140,7 +141,7 @@
         <div class="container jumbotron text-center" id="devlopment">
             <h1 class="display-4">Development of RECS</h1>
             <p class="lead text-justify text-center">
-                This project is actively developed by Siddhartha Dev Gupta. Under the Guidance of project guide
+                This project is developed by Siddhartha Dev Gupta. Under the Guidance of project guide
                 Mrs.Pavithra
                 MN.
             </p>
@@ -151,7 +152,7 @@
 
         <div class="container jumbotron text-center" id="status">
             <h1 class="display-4">Project Status</h1>
-            <p class="lead text-justify text-center">The project is in beta stage. The code can be found on my
+            <p class="lead text-justify text-center">The project is completed and the code can be found on my
                 <a class="btn btn-outline-dark"
                     href="https://github.com/backstab319/Residency-Exchange-Collaberation-System">github page.</a></p>
         </div>

@@ -63,7 +63,7 @@
         <div class="form-group">
             <form method="POST" action="<?php $cpanel;?>">
             <input class="form-control mb-2" type="text" name="heading-val" placeholder="Page Heading">
-            <input type="submit" value="Change" class="btn btn-outline-dark" name="heading">
+            <input type="submit" value="Change" class="btn btn-outline-primary" name="heading">
             </form>
         </div>
     </div>
@@ -73,7 +73,7 @@
         <div class="form-group">
             <form method="POST" action="<?php $cpanel;?>">
             <input class="form-control mb-2" type="text" name="description-val" placeholder="Page Description">
-            <input type="submit" value="Change" class="btn btn-outline-dark" name="description">
+            <input type="submit" value="Change" class="btn btn-outline-primary" name="description">
             </form>
         </div>
     </div>
@@ -86,9 +86,53 @@
             <input class="form-control mb-2" type="text" name="prod_des" placeholder="Product or Service Description">
             <input class="form-control mb-2" type="number" name="prod_pr" placeholder="Product or Service Price">
             <input class="form-control mb-2" type="text" name="prod_link" placeholder="Product link">
-            <input type="submit" value="Add Product" class="btn btn-outline-dark mb-2" name="addprod">
+            <input type="submit" value="Add Product" class="btn btn-outline-primary mb-2" name="addprod">
             </form>
         </div>
+    </div>
+
+    <div class="container text-center col-md-4 col-lg-4 mb-2">
+        <h1 class="display-5">Update Products and Services</h1>
+        <form method="POST" action="<?php $cpanel;?>">
+            <div class="form-group">
+                <label for="change">Select current the item attribute to change</label>
+                <select name="cattrib" id="change" class="form-control mb-2">
+                    <option value="product_name">Product Name</option>
+                    <option value="product_description">Product Description</option>
+                    <option value="product_price">Product Price</option>
+                    <option value="product_link">Product Image Link</option>
+                </select>
+                <input type="text" class="form-control mb-2" placeholder="Current Value" name="cval">
+                <label for="change">Select the item attribute to change</label>
+                <select name="attrib" id="change" class="form-control mb-2">
+                    <option value="product_name">Product Name</option>
+                    <option value="product_description">Product Description</option>
+                    <option value="product_price">Product Price</option>
+                    <option value="product_link">Product Image Link</option>
+                </select>
+                <input type="text" class="form-control mb-2" placeholder="New Value" name="nval">
+            <input type="submit" value="Update" name="update" class="btn btn-outline-primary form-control mb-2">
+            </div>
+        </form>
+        <?php
+            if(isset($_POST["update"])){
+                update();
+            }
+            function update(){
+                global $conn,$bus_name,$owner_name;
+                $col = $_POST["attrib"];
+                $cval = $_POST["cval"];
+                $nval = $_POST["nval"];
+                $ccol = $_POST["cattrib"];
+                if(($col and $cval and $nval and $ccol) != NULL){
+                    $sql = "UPDATE business_product SET $col='$nval' WHERE $ccol='$cval' AND bus_name='$bus_name' AND owner_name='$owner_name'";
+                    $conn->query($sql);
+                    echo "<p class='lead text-center text-justify'>Item successfully updated!</p>";
+                }else{
+                    echo "<p class='lead text-center text-justify'>Please check all the input fields</p>";
+                }
+            }
+        ?>
     </div>
 
     <?php
